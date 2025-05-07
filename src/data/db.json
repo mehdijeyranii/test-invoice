@@ -1,0 +1,125 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "fullName": "علی رضایی",
+      "email": "ali.rezaei@example.com",
+      "phone": "09121234567"
+    },
+    {
+      "id": 2,
+      "fullName": "زهرا محمدی",
+      "email": "zahra.mohammadi@example.com",
+      "phone": "09351231234"
+    },
+    {
+      "id": 3,
+      "fullName": "محمد سلیمانی",
+      "email": "mohammad.soleimani@example.com",
+      "phone": "09191234567"
+    },
+    {
+      "id": 4,
+      "fullName": "سارا امینی",
+      "email": "sara.amini@example.com",
+      "phone": "09122234567"
+    },
+    {
+      "id": 5,
+      "fullName": "رضا شاهی",
+      "email": "reza.shahi@example.com",
+      "phone": "09352234567"
+    },
+    {
+      "id": 6,
+      "fullName": "مهدی",
+      "email": "mehdijeyrani@gmail.com",
+      "phone": "02538748604"
+    },
+    {
+      "id": 7,
+      "fullName": "نازنین بهادری",
+      "email": "naza@gmail.com",
+      "phone": "09929399432"
+    }
+  ],
+  "invoices": [
+    {
+      "id": 1,
+      "customerId": 1,
+      "invoiceNumber": "INV-001",
+      "invoiceDate": "2025-05-01",
+      "description": "خرید تجهیزات کامپیوتری"
+    },
+    {
+      "id": 2,
+      "customerId": 2,
+      "invoiceNumber": "INV-002",
+      "invoiceDate": "2025-05-03",
+      "description": "خرید لوازم جانبی موبایل"
+    },
+    {
+      "id": 3,
+      "customerId": 3,
+      "invoiceNumber": "INV-003",
+      "invoiceDate": "2025-05-02",
+      "description": "خرید پرینتر و لوازم جانبی"
+    },
+    {
+      "id": 4,
+      "customerId": 4,
+      "invoiceNumber": "INV-004",
+      "invoiceDate": "2025-05-04",
+      "description": "خرید لوازم خانگی"
+    },
+    {
+      "id": 5,
+      "customerId": 5,
+      "invoiceNumber": "INV-005",
+      "invoiceDate": "2025-05-05",
+      "description": "خرید تلویزیون و لوازم جانبی"
+    }
+  ],
+  "invoiceItems": [
+    {
+      "id": 101,
+      "name": "ماوس گیمینگ",
+      "quantity": 2,
+      "price": 350000,
+      "description": "ماوس مخصوص بازی با دقت بالا",
+      "invoiceId": 1
+    },
+    {
+      "id": 102,
+      "name": "کیبورد مکانیکی",
+      "quantity": 1,
+      "price": 1250000,
+      "description": "کیبورد مکانیکی با نور پس‌زمینه",
+      "invoiceId": 1
+    },
+    {
+      "id": 103,
+      "name": "هدفون بلوتوث",
+      "quantity": 1,
+      "price": 780000,
+      "description": "هدفون بی‌سیم با کیفیت صدا بالا",
+      "invoiceId": 2
+    },
+    {
+      "id": 104,
+      "name": "پرینتر لیزری",
+      "quantity": 1,
+      "price": 3500000,
+      "description": "پرینتر لیزری با سرعت بالا",
+      "invoiceId": 3
+    },
+    {
+      "id": 105,
+      "name": "تلویزیون ۴K",
+      "quantity": 1,
+      "price": 15000000,
+      "description": "تلویزیون ۴K با قابلیت اسمارت",
+      "invoiceId": 5
+    }
+  ]
+}
