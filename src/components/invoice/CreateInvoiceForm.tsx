@@ -5,6 +5,7 @@ import InvoiceDescription from "./InvoiceDescription";
 import PaymentStatusDropdown from "./PaymentStatusDropdown";
 import InvoiceMetaSection from "./InvoiceMetaSection";
 import { Button } from "../ui/button";
+import toast from "react-hot-toast";
 
 type PaymentStatus = "paid" | "unpaid" | "pending";
 
@@ -50,6 +51,7 @@ const CreateInvoiceForm: React.FC<CreateInvoiceFormProps> = ({ formRef }) => {
   } = form;
 
   const onSubmit = (data: InvoiceFormValue) => {
+    toast.success("فاکتور جدید با موفقیت ثبت شد!")
     console.log(data);
   };
 

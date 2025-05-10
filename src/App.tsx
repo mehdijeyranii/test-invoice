@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Button } from "./components/ui/button";
 import CreateInvoiceForm from "./components/invoice/CreateInvoiceForm";
+import { Toaster } from "react-hot-toast";
 
 const App: React.FC = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -25,6 +26,7 @@ const App: React.FC = () => {
         فاکتور فروش
       </h1>
       <CreateInvoiceForm formRef={formRef} />
+      <Toaster position={"bottom-right"} />
     </div>
   );
 };

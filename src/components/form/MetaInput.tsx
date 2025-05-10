@@ -29,12 +29,16 @@ const MetaInput: React.FC<Props> = ({ register, errors }) => {
             <input
               type="text"
               className={`h-10 w-full px-5 text-sm ${
-                field.editable ? "text-neutral-600" : "bg-neutral-100 text-neutral-400"
+                field.editable
+                  ? "text-neutral-600"
+                  : "bg-neutral-100 text-neutral-400"
               }`}
               disabled={!field.editable}
               {...register(
                 field.name,
-                field.editable ? { required: "این فیلد الزامی است" } : {}
+                field.editable
+                  ? { required: `لطفا ${field.label.replace(":", "")} را وارد نمایید` }
+                  : {}
               )}
             />
             {field.editable && errors[field.name] && (
