@@ -2,24 +2,23 @@ import { useForm } from "react-hook-form";
 import type { Customer } from "../types";
 import { createCustomer } from "../api/customers";
 import toast from "react-hot-toast";
-
-type CustomerFormData = Omit<Customer, "id">;
+import { v4 as uuidv4 } from "uuid";
 
 type Props = {
   onSuccess: () => void;
 };
 
 const CustomerForm = ({ onSuccess }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<CustomerFormData>();
+  const form = useForm<Customer>();
+  const { register, handleSubmit, reset } = form;
 
-  const onSubmit = async (data: CustomerFormData) => {
+  const onSubmit = async (data: Customer) => {
     try {
-      await createCustomer(data);
+      const customerWithId = {
+        ...data,
+        id: uuidv4(),
+      };
+      await createCustomer(customerWithId);
       toast.success("مشتری با موفقیت ثبت شد");
       reset();
       onSuccess?.();
@@ -35,45 +34,24 @@ const CustomerForm = ({ onSuccess }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-      <div>
+    <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+      <div className="relative">
         <input
           type="text"
-          {...register("fullName", { required: "وارد کردن نام الزامی است" })}
-          className={`w-full text-sm p-4 border border-neutral-300 rounded-md ${
-            errors.fullName &&
-            "outline-rose-600 bg-rose-600/10 border-rose-600 text-rose-600"
-          }`}
+          {...register("fullName", {
+            required: "لطفا نام و نام خانوادگی خود را وارد نمایید",
+          })}
           placeholder="نام‌ونام‌خانوادگی"
         />
-        {errors.fullName && (
-          <p className="text-rose-600 text-xs font-light mt-1">
-            {errors.fullName.message}
-          </p>
-        )}
       </div>
 
-      <div>
+      <div className="relative mb-8">
         <input
           type="email"
-          {...register("email", {
-            required: "وارد کردن ایمیل الزامی است",
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "فرمت ایمیل معتبر نیست",
-            },
-          })}
-          className={`w-full text-sm p-4 border border-neutral-300 rounded-md ${
-            errors.email &&
-            "outline-rose-600 bg-rose-600/10 border-rose-600 text-rose-600"
-          }`}
+          dir="ltr"
+          {...register("email", { required: "لطفا ایمیل خود را وارد نمایید" })}
           placeholder="آدرس‌الکترونیکی"
         />
-        {errors.email && (
-          <p className="text-rose-600 text-xs font-light mt-1">
-            {errors.email.message}
-          </p>
-        )}
       </div>
 
       <div>

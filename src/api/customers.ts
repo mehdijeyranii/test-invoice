@@ -1,5 +1,5 @@
 import api from "../services/apiService";
-import type { Customer, CustomerInput } from "../types";
+import type { Customer } from "../types";
 
 // READ Customers => GET ALL
 export const getCustomers = async (): Promise<Customer[]> => {
@@ -25,7 +25,7 @@ export const getCustomerById = async (id: number): Promise<Customer> => {
 
 // CREATE Customer => POST
 export const createCustomer = async (
-  customerData: CustomerInput
+  customerData: Customer
 ): Promise<Customer> => {
   try {
     const response = await api.post("/customers", customerData);
@@ -39,7 +39,7 @@ export const createCustomer = async (
 // UPDATE Customer => PUT
 export const updateCustomer = async (
   id: number,
-  customerData: CustomerInput
+  customerData: Customer
 ): Promise<Customer> => {
   try {
     const response = await api.put(`/customers/${id}`, customerData);

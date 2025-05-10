@@ -1,27 +1,19 @@
-export interface Customer {
-  id: number;
-  fullName: string;
-  email: string;
-  phone: string;
-}
+export type PaymentStatus = "paid" | "unpaid" | "pending";
 
-export interface Invoice {
-  id: number;
-  customerId: number;
-  invoiceNumber: string;
-  invoiceDate: string;
-  description?: string;
-}
-
-export interface InvoiceItem {
-  id: number;
-  name: string;
+export type InvoiceItem = {
+  productName: string;
   quantity: number;
-  price: number;
+  unitPrice: number;
   description?: string;
-  invoiceId: number;
-}
+};
 
-export type CustomerInput = Omit<Customer, "id">;
-export type InvoiceInput = Omit<Invoice, "id">;
-export type InvoiceItemInput = Omit<InvoiceItem, "id">;
+export interface InvoiceFormValue {
+  customerName: string;
+  invoiceNumber: number;
+  invoiceDate: string;
+  invoiceTime: string;
+  paymentStatus: PaymentStatus;
+  dueDate: string;
+  items: InvoiceItem[];
+  description?: string;
+}

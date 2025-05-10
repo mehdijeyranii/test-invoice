@@ -1,79 +1,55 @@
 {
   "customers": [
     {
-      "id": 1,
-      "fullName": "علی رضایی",
-      "email": "ali.rezaei@example.com",
-      "phone": "09121234567"
-    },
-    {
-      "id": 2,
-      "fullName": "زهرا محمدی",
-      "email": "zahra.mohammadi@example.com",
-      "phone": "09351231234"
-    },
-    {
-      "id": 3,
-      "fullName": "محمد سلیمانی",
-      "email": "mohammad.soleimani@example.com",
-      "phone": "09191234567"
-    },
-    {
-      "id": 4,
-      "fullName": "سارا امینی",
-      "email": "sara.amini@example.com",
-      "phone": "09122234567"
-    },
-    {
-      "id": 5,
-      "fullName": "رضا شاهی",
-      "email": "reza.shahi@example.com",
-      "phone": "09352234567"
-    },
-    {
-      "id": 6,
-      "fullName": "مهدی",
+      "id": "41f69fe5-0864-428e-872e-6d1b0e7c0306",
+      "fullName": "مهدی جیرانی",
       "email": "mehdijeyrani@gmail.com",
-      "phone": "02538748604"
+      "phone": ""
     },
     {
-      "id": 7,
-      "fullName": "نازنین بهادری",
-      "email": "naza@gmail.com",
-      "phone": "09929399432"
+      "id": "904eb3c4-8379-4c01-8109-66de72dd705a",
+      "fullName": "علیرضا بیابانی",
+      "email": "mehdijeyrani@gmail.com",
+      "phone": ""
+    },
+    {
+      "id": "caae38f7-597f-484c-b8a9-c737375e1dd1",
+      "fullName": "مهدی جیرانی افزا",
+      "email": "mehdijeyrani@gmail.com",
+      "phone": "9356638333"
     }
   ],
   "invoices": [
     {
-      "id": 1,
+      "id": "1",
       "customerId": 1,
       "invoiceNumber": "INV-001",
       "invoiceDate": "2025-05-01",
       "description": "خرید تجهیزات کامپیوتری"
     },
     {
-      "id": 2,
+      "id": "2",
       "customerId": 2,
       "invoiceNumber": "INV-002",
       "invoiceDate": "2025-05-03",
       "description": "خرید لوازم جانبی موبایل"
     },
     {
-      "id": 3,
+      "id": "3",
       "customerId": 3,
       "invoiceNumber": "INV-003",
       "invoiceDate": "2025-05-02",
       "description": "خرید پرینتر و لوازم جانبی"
     },
     {
-      "id": 4,
+      "id": "4",
       "customerId": 4,
       "invoiceNumber": "INV-004",
       "invoiceDate": "2025-05-04",
       "description": "خرید لوازم خانگی"
     },
     {
-      "id": 5,
+      "id": "5",
       "customerId": 5,
       "invoiceNumber": "INV-005",
       "invoiceDate": "2025-05-05",
@@ -82,7 +58,7 @@
   ],
   "invoiceItems": [
     {
-      "id": 101,
+      "id": "101",
       "name": "ماوس گیمینگ",
       "quantity": 2,
       "price": 350000,
@@ -90,7 +66,7 @@
       "invoiceId": 1
     },
     {
-      "id": 102,
+      "id": "102",
       "name": "کیبورد مکانیکی",
       "quantity": 1,
       "price": 1250000,
@@ -98,7 +74,7 @@
       "invoiceId": 1
     },
     {
-      "id": 103,
+      "id": "103",
       "name": "هدفون بلوتوث",
       "quantity": 1,
       "price": 780000,
@@ -106,7 +82,7 @@
       "invoiceId": 2
     },
     {
-      "id": 104,
+      "id": "104",
       "name": "پرینتر لیزری",
       "quantity": 1,
       "price": 3500000,
@@ -114,7 +90,7 @@
       "invoiceId": 3
     },
     {
-      "id": 105,
+      "id": "105",
       "name": "تلویزیون ۴K",
       "quantity": 1,
       "price": 15000000,
