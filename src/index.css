@@ -203,16 +203,27 @@
     background-color: var(--color-rose-400) !important;
   }
 
-  .rmdp-shadow, .rmdp-ep-arrow:after {
+  .rmdp-shadow,
+  .rmdp-ep-arrow:after {
     box-shadow: unset !important;
   }
 
-  .rmdp-ep-arrow:after{
+  .rmdp-ep-arrow:after {
     display: none !important;
   }
 
-  .rmdp-wrapper{
+  .rmdp-wrapper {
     border: 1px solid var(--color-border) !important;
     background: var(--color-neutral-50) !important;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
   }
 }

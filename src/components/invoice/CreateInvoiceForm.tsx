@@ -34,25 +34,36 @@ interface CreateInvoiceFormProps {
 
 const CreateInvoiceForm: React.FC<CreateInvoiceFormProps> = ({ formRef }) => {
   const [values, setValues] = useState<Date | null>(new Date());
-  // const [items, setItems] = useState<InvoiceItem[]>([]);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-
-  const [newItem, setNewItem] = useState<InvoiceItem>({
-    productName: "",
-    quantity: 1,
-    unitPrice: 10000,
-    description: "",
-  });
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const form = useForm<InvoiceFormValue>({
     defaultValues: {
+      customerName: "مهدی",
       invoiceNumber: Date.now(),
       invoiceDate: new Date().toLocaleDateString("fa-IR"),
       invoiceTime: new Date().toLocaleTimeString("fa-IR", { hour12: false }),
       paymentStatus: "unpaid",
       items: [],
     },
+    shouldUnregister: false,
   });
+
+  const itemForm = useForm<InvoiceItem>({
+    defaultValues: {
+      productName: "",
+      quantity: 1,
+      unitPrice: 10000,
+      description: "",
+    },
+  });
+
+  const {
+    register: registerItem,
+    handleSubmit: handleItemSubmit,
+    reset: resetItemForm,
+  } = itemForm;
 
   const {
     control,
@@ -77,23 +88,18 @@ const CreateInvoiceForm: React.FC<CreateInvoiceFormProps> = ({ formRef }) => {
     setValue("dueDate", date?.toString() || "");
   };
 
-  const handleAddItem = () => {
-    append(newItem);
-
-    setNewItem({
-      productName: "",
-      quantity: 1,
-      unitPrice: 10000,
-      description: "",
-    });
-
-    toast.success("کالا با موفقیت ثبت شد!");
-  };
-
   const handleRemoveItem = (index: number) => {
     remove(index);
 
     toast.success("آیتم با موفقیت حذف شد!");
+  };
+
+  const handleEditItem = (index: number) => {
+    const itemToEdit = fields[index];
+    itemForm.reset(itemToEdit);
+    setIsEditing(true);
+    setEditIndex(index);
+    setIsOpenModal(true);
   };
 
   return (
@@ -126,75 +132,68 @@ const CreateInvoiceForm: React.FC<CreateInvoiceFormProps> = ({ formRef }) => {
             isOpen={isOpenModal}
             onClose={() => setIsOpenModal(false)}
           >
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-
-                if (!newItem.productName.trim()) {
-                  toast.error("نام کالا الزامی است!");
-                  return;
-                }
-
-                append(newItem);
-                setNewItem({
-                  productName: "",
-                  quantity: 1,
-                  unitPrice: 10000,
-                  description: "",
-                });
-                console.log("reset newItem", newItem);
-
-                setIsOpenModal(false);
-              }}
-              className="flex flex-col gap-4"
-            >
+            <div className="flex flex-col gap-6">
               <input
                 type="text"
                 placeholder="نام کالا"
-                value={newItem.productName}
-                onChange={(e) =>
-                  setNewItem({ ...newItem, productName: e.target.value })
-                }
-                className="border p-2"
-                required
+                {...registerItem("productName", { required: true })}
+                className="border p-2 text-sm h-12"
               />
               <input
                 type="number"
                 placeholder="تعداد"
-                value={newItem.quantity}
-                onChange={(e) =>
-                  setNewItem({ ...newItem, quantity: +e.target.value })
-                }
-                className="border p-2"
-                min={1}
+                {...registerItem("quantity", { min: 1 })}
+                className="border p-2 text-sm h-12"
               />
               <input
                 type="number"
                 placeholder="قیمت واحد"
-                value={newItem.unitPrice}
-                onChange={(e) =>
-                  setNewItem({ ...newItem, unitPrice: +e.target.value })
-                }
-                className="border p-2"
-                min={0}
+                {...registerItem("unitPrice", { min: 0 })}
+                className="border p-2 text-sm h-12"
               />
               <textarea
                 placeholder="توضیحات"
-                value={newItem.description}
-                onChange={(e) =>
-                  setNewItem({ ...newItem, description: e.target.value })
-                }
-                className="border p-2"
+                {...registerItem("description")}
+                className="border p-2 resize-none text-sm"
+                rows={3}
               />
 
-              <Button
-                type="button"
-                onClick={handleAddItem}
-                className="bg-green-600"
-              >
-                افزودن به لیست
-              </Button>
-            </form>
+              {isEditing ? (
+                <Button
+                  type="button"
+                  className="bg-rose-500 text-white"
+                  onClick={handleItemSubmit((data) => {
+                    if (editIndex === null) return;
+                    const updatedFields = [...fields];
+                    updatedFields[editIndex] = {
+                      ...data,
+                      id: updatedFields[editIndex].id,
+                    };
+                    setValue("items", updatedFields);
+                    toast.success("آیتم با موفقیت ویرایش شد!");
+                    resetItemForm();
+                    setIsEditing(false);
+                    setEditIndex(null);
+                    setIsOpenModal(false);
+                  })}
+                >
+                  ویرایش آیتم
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  className="bg-green-600 cursor-pointer h-12 mr-auto"
+                  size="lg"
+                  onClick={handleItemSubmit((data) => {
+                    append(data);
+                    resetItemForm();
+                    toast.success("کالا با موفقیت ثبت شد!");
+                  })}
+                >
+                  افزودن
+                </Button>
+              )}
+            </div>
           </Modal>
 
           <table className="w-full border-separate">
@@ -215,7 +214,13 @@ const CreateInvoiceForm: React.FC<CreateInvoiceFormProps> = ({ formRef }) => {
                   <td className="p-4">{field.unitPrice}</td>
                   <td className="p-4">{field.description}</td>
                   <td className="p-4 flex gap-2 justify-center">
-                    <Button size="sm">ویرایش</Button>
+                    <Button
+                      size="sm"
+                      type="button"
+                      onClick={() => handleEditItem(index)}
+                    >
+                      ویرایش
+                    </Button>
                     <Button
                       type="button"
                       size="sm"
